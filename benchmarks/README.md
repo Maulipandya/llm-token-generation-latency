@@ -26,16 +26,16 @@ This folder contains the implementation for benchmarking token-generation latenc
 
 ## Experiment Setup
 
-- Model: TinyLlama (1.1B) as a proxy for LLaMA
-- Device: CPU
-- Batch size: 1 (simulates real-time usage)
-- Prompt lengths: 32, 128, 256, 512 tokens
-- Output lengths: 32, 64, 128 tokens
-- Multiple runs are averaged to reduce variance
+- Model: TinyLlama (1.1B) as a proxy for LLaMA  
+- Device: CPU  
+- Batch size: 1 (simulates real-time usage)  
+- Prompt lengths: 32, 128, 256, 512 tokens  
+- Output lengths: 32, 64, 128 tokens  
+- Multiple runs are averaged to reduce variance  
 
 ## Methodology
 
-- The first forward pass measures **TTFT** (prefill + first token).
+- The first forward pass measures TTFT (prefill + first token).
 - Remaining tokens are generated sequentially using KV-cache.
 - TPOT is computed from the decode phase.
 - Total latency is the sum of prefill and decode time.
@@ -43,18 +43,14 @@ This folder contains the implementation for benchmarking token-generation latenc
 ## Usage
 
 ### Run Benchmark
-
 ```bash
 python benchmark_llm_latency.py
 ```
 
 This generates:
-```
-benchmark_results.csv
-```
+- `benchmark_results.csv`
 
 ### Generate Plots
-
 ```bash
 python plot_results.py
 ```
