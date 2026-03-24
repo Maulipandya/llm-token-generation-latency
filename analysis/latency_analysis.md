@@ -2,46 +2,39 @@
 
 ## Observations
 
-- **TTFT increases with prompt length**
-  - Longer prompts require more computation during the prefill phase.
-
-- **End-to-end latency increases with output length**
-  - Because tokens are generated sequentially in autoregressive decoding.
-
-- **TPOT remains relatively stable**
-  - Due to KV-cache reuse during decoding.
-
-- **Throughput improves for larger outputs**
-  - But does not fully represent user-perceived latency.
+- Time to First Token (TTFT) increases as prompt length increases because more computation is required during the prefill phase.
+- End-to-end latency increases with output length since tokens are generated sequentially.
+- Time Per Output Token (TPOT) remains relatively stable due to the use of KV-cache.
+- Throughput improves for larger workloads but does not fully reflect user-perceived latency.
 
 ---
 
 ## Findings
 
-- Prompt length mainly affects **Time to First Token (TTFT)**.
-- Output length mainly affects **total latency**.
-- **KV-cache improves decoding efficiency**, keeping TPOT stable.
-- **Latency metrics are more important than throughput** for real-time applications.
-- There is a clear separation between **prefill** and **decode** phases.
+- Prompt length primarily affects TTFT.
+- Output length primarily affects total latency.
+- KV-cache helps maintain stable decoding performance.
+- Throughput alone is not sufficient to evaluate real-time performance.
+- There is a clear separation between prefill and decode phases.
 
 ---
 
 ## Interpretation
 
-The results show two phases in LLM inference:
+LLM inference consists of two main phases:
 
 ### Prefill Phase
-- Depends on prompt length
-- Affects TTFT
+- Processes the input prompt
+- Dominates TTFT
 
 ### Decode Phase
-- Depends on output length
-- Affects TPOT and total latency
+- Generates tokens one by one
+- Determines TPOT and total latency
 
 ---
 
 ## Conclusion
 
-- TTFT is critical for responsiveness
-- Output length affects total latency
-- Both latency and throughput should be considered
+- TTFT is critical for responsiveness in real-time applications.
+- Output length impacts total response time.
+- Both latency and throughput should be considered for evaluating performance.
