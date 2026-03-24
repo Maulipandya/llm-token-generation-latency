@@ -9,10 +9,17 @@ This folder contains the output of latency benchmarking experiments for LLaMA-fa
 
 ## Metrics Included
 
-- **TTFT (Time to First Token)** – Time taken to generate the first token after input.
-- **TPOT (Time Per Output Token)** – Average time per generated token after the first.
-- **End-to-End Latency** – Total time to generate the complete output.
-- **Throughput (tokens/sec)** – Number of tokens generated per second.
+- **TTFT (Time to First Token)**  
+  Time taken to generate the first token after input.
+
+- **TPOT (Time Per Output Token)**  
+  Average time per generated token after the first.
+
+- **End-to-End Latency**  
+  Total time to generate the complete output.
+
+- **Throughput (tokens/sec)**  
+  Number of tokens generated per second.
 
 ## Notes
 
