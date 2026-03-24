@@ -1,40 +1,34 @@
 # Latency Analysis
 
 ## Observations
-
 - Time to First Token (TTFT) increases as prompt length increases because more computation is required during the prefill phase.
-- End-to-end latency increases with output length since tokens are generated sequentially.
-- Time Per Output Token (TPOT) remains relatively stable due to the use of KV-cache.
-- Throughput improves for larger workloads but does not fully reflect user-perceived latency.
-
----
+- End-to-end latency increases with output length because tokens are generated sequentially during decoding.
+- Time Per Output Token (TPOT) remains relatively stable across output lengths, showing the benefit of KV-cache during decoding.
+- Throughput varies across configurations, but higher throughput does not always mean better user-perceived responsiveness.
+- The results show a clear separation between prefill cost and decode cost in LLaMA inference.
 
 ## Findings
-
 - Prompt length primarily affects TTFT.
-- Output length primarily affects total latency.
-- KV-cache helps maintain stable decoding performance.
-- Throughput alone is not sufficient to evaluate real-time performance.
-- There is a clear separation between prefill and decode phases.
-
----
+- Output length primarily affects end-to-end latency.
+- TPOT is more stable than TTFT across different prompt lengths.
+- KV-cache helps maintain decoding efficiency after the first token.
+- Throughput alone is not sufficient to evaluate interactive performance.
 
 ## Interpretation
-
 LLM inference consists of two main phases:
 
 ### Prefill Phase
-- Processes the input prompt
-- Dominates TTFT
+- Processes the full input prompt
+- Dominates Time to First Token (TTFT)
+- Becomes more expensive as prompt length increases
 
 ### Decode Phase
-- Generates tokens one by one
+- Generates output tokens one by one
 - Determines TPOT and total latency
-
----
+- Benefits from KV-cache reuse
 
 ## Conclusion
-
 - TTFT is critical for responsiveness in real-time applications.
-- Output length impacts total response time.
-- Both latency and throughput should be considered for evaluating performance.
+- Output length has a strong effect on total completion time.
+- TPOT stays comparatively stable because decoding reuses cached attention states.
+- Both latency and throughput should be considered when evaluating LLM inference performance.
