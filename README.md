@@ -5,10 +5,11 @@ This project benchmarks token-generation latency in LLaMA-family models using Ti
 
 ## Metrics
 The following latency metrics are evaluated:
-- Time to First Token (TTFT) – Time taken to generate the first token after input.
-- Time Per Output Token (TPOT) – Average time to generate each token after the first.
-- End-to-End Latency – Total time to generate the complete output.
-- Throughput (tokens/sec) – Number of tokens generated per second.
+
+- **Time to First Token (TTFT)** – Time taken to generate the first token after input.
+- **Time Per Output Token (TPOT)** – Average time to generate each token after the first.
+- **End-to-End Latency** – Total time to generate the complete output.
+- **Throughput (tokens/sec)** – Number of tokens generated per second.
 
 ## Key Findings
 - TTFT increases with prompt length due to higher computation during the prefill phase.
@@ -17,47 +18,61 @@ The following latency metrics are evaluated:
 - Throughput alone is not sufficient to evaluate performance; latency must also be considered.
 
 ## How the Paper is Implemented in Code
-The implementation directly follows the methodology described in the paper:
 
-Prefill vs Decode Separation
+### Prefill vs Decode Separation
 - TTFT is measured using the first forward pass (prompt processing + first token).
 - Remaining tokens are generated step-by-step to simulate autoregressive decoding.
 
-Controlled Input Sizes
-- Prompts are generated with fixed token lengths: 32, 128, 256, 512
-- Output lengths are fixed: 32, 64, 128
+### Controlled Input Sizes
+- Prompt lengths: **32, 128, 256, 512 tokens**
+- Output lengths: **32, 64, 128 tokens**
 
-Metric Computation
-- TTFT → Time until first token
-- TPOT → Average time per generated token
-- Total Latency → TTFT + decode time
-- Throughput → Tokens generated per second
+### Metric Computation
+- TTFT → Time until first token  
+- TPOT → Average time per generated token  
+- Total Latency → TTFT + decode time  
+- Throughput → Tokens generated per second  
 
-Experimental Consistency
+### Experimental Consistency
 - Batch size = 1 (simulates real-time usage)
 - Multiple runs averaged to reduce variance
 
 ## Repository Structure
-analysis/        → Interpretation and findings  
-benchmarks/      → Benchmarking code  
-optimization/    → Performance improvement ideas  
-report/          → Research paper  
-results/         → Benchmark outputs (CSV)  
+- `analysis/` → Interpretation and findings  
+- `benchmarks/` → Benchmarking and plotting code  
+- `optimization/` → Performance improvement ideas  
+- `report/` → Research paper  
+- `results/` → Benchmark outputs (CSV)
 
 ## Setup
+
 Install dependencies:
+```bash
 pip install -r requirements.txt
+```
 
 Or manually:
-pip install torch transformers
+```bash
+pip install torch transformers matplotlib pandas
+```
 
 ## Usage
+
 Run the benchmark:
+```bash
 python benchmarks/benchmark_llm_latency.py
+```
+
+Generate plots:
+```bash
+python benchmarks/plot_results.py
+```
 
 ## Results
 Benchmark outputs are stored in:
+```
 results/benchmark_results.csv
+```
 
 These results support the analysis and findings presented in the project report.
 
