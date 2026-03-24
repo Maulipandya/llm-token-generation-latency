@@ -1,10 +1,11 @@
 # Latency Analysis
 
 ## Observations
-- Time to First Token (TTFT) increases as prompt length increases because more computation is required during the prefill phase.
+- Time to First Token (TTFT) increases significantly as prompt length increases because more computation is required during the prefill phase.
 - End-to-end latency increases with output length because tokens are generated sequentially during decoding.
+- End-to-end latency increases approximately linearly with output length due to the autoregressive decoding process.
 - Time Per Output Token (TPOT) remains relatively stable across output lengths, showing the benefit of KV-cache during decoding.
-- Throughput varies across configurations, but higher throughput does not always mean better user-perceived responsiveness.
+- Throughput generally decreases as prompt length increases due to higher prefill cost, but higher throughput does not always imply better user-perceived responsiveness.
 - The results show a clear separation between prefill cost and decode cost in LLaMA inference.
 
 ## Findings
