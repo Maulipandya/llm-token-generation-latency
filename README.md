@@ -76,6 +76,18 @@ results/benchmark_results.csv
 
 These results support the analysis and findings presented in the project report.
 
+## Interpretation of Results
+
+The reported results reflect latency trends observed under controlled CPU-based experiments using a LLaMA-family model.
+
+Key observations supported by the data:
+- TTFT increases with prompt length due to prefill cost
+- End-to-end latency increases with output length due to sequential decoding
+- TPOT remains relatively stable across configurations
+- Throughput alone does not represent user-perceived responsiveness
+
+These findings align with the theoretical behavior of autoregressive transformer inference and are intended to highlight relative performance characteristics rather than absolute deployment benchmarks.
+
 ## Notes
 - TinyLlama (1.1B) is used as a proxy for LLaMA due to hardware constraints.
 - Experiments are performed on CPU.
