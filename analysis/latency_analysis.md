@@ -16,22 +16,32 @@
 
 ---
 
+## Findings
+
+- Prompt length mainly affects **Time to First Token (TTFT)**.
+- Output length mainly affects **total latency**.
+- **KV-cache improves decoding efficiency**, keeping TPOT stable.
+- **Latency metrics are more important than throughput** for real-time applications.
+- There is a clear separation between **prefill** and **decode** phases.
+
+---
+
 ## Interpretation
 
-The results clearly show two phases in LLM inference:
+The results show two phases in LLM inference:
 
-### 1. Prefill Phase
+### Prefill Phase
 - Depends on prompt length
-- Dominates TTFT
+- Affects TTFT
 
-### 2. Decode Phase
+### Decode Phase
 - Depends on output length
-- Controls TPOT and total latency
+- Affects TPOT and total latency
 
 ---
 
 ## Conclusion
 
-- TTFT is critical for real-time applications
-- Output length mainly affects total response time
-- Both latency and throughput must be considered for performance evaluation
+- TTFT is critical for responsiveness
+- Output length affects total latency
+- Both latency and throughput should be considered
